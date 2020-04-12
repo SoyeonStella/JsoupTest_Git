@@ -3,12 +3,16 @@ package kr.ac.hansung.jsouptest
 import android.R
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.select.Elements
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,7 +41,8 @@ class MainActivity : AppCompatActivity() {
         var listTitle: ArrayList<String> = ArrayList()
         var listName: ArrayList<String> = ArrayList()
         var listUrl: ArrayList<String> = ArrayList()
-        protected override fun doInBackground(vararg voids: Void): Void? {
+
+        override fun doInBackground(vararg voids: Void?): Void? {
             try {
                 val doc: Document = Jsoup.connect(melon_chart_url).get()
                 val rank_list1: Elements =
@@ -75,5 +80,6 @@ class MainActivity : AppCompatActivity() {
             }
             return null
         }
+
     }
 }
