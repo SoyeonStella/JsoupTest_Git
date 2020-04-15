@@ -1,6 +1,5 @@
 package kr.ac.hansung.jsouptest
 
-import android.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.item_chart.view.*
 
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>() {
@@ -36,25 +36,25 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ItemViewHolder>() {
         listData.add(data)
     }
 
-    inner class ItemViewHolder(itemView: View) :
-        RecyclerView.ViewHolder(itemView) {
-        private val txt_ranktNum: TextView
-        private val txt_chartName: TextView
-        private val txt_chartTitle: TextView
-        private val img_chart: ImageView
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //private val txt_ranktNum: TextView
+        //private val txt_chartName: TextView
+        //private val txt_chartTitle: TextView
+        //private val img_chart: ImageView
+
         fun onBind(data: ChartDTO) {
-            txt_ranktNum.setText(data.getRankNum())
-            txt_chartName.setText(data.getName())
-            txt_chartTitle.setText(data.getTitle())
-            Glide.with(itemView.context).load(data.getImageUrl()).into(img_chart)
+            itemView.txt_ranktNum.setText(data.getRankNum().toString())
+            itemView.txt_chartName.setText(data.getName().toString())
+            itemView.txt_chartTitle.setText(data.getTitle().toString())
+            Glide.with(itemView.context).load(data.getImageUrl()).into(itemView.img_chart)
         }
 
-        init {
-            txt_chartTitle = itemView.findViewById(R.id.txt_chartTitle)
-            txt_chartName = itemView.findViewById(R.id.txt_chartName)
-            txt_ranktNum = itemView.findViewById(R.id.txt_ranktNum)
-            img_chart = itemView.findViewById(R.id.img_chart)
-        }
+        //init {
+          //  txt_chartTitle = itemView.findViewById(R.id.txt_chartTitle)
+          //  txt_chartName = itemView.findViewById(R.id.txt_chartName)
+          //  txt_ranktNum = itemView.findViewById(R.id.txt_ranktNum)
+          //  img_chart = itemView.findViewById(R.id.img_chart)
+        //}
     }
 }
 

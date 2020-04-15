@@ -1,6 +1,5 @@
 package kr.ac.hansung.jsouptest
 
-import android.R
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
@@ -17,16 +16,22 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
     var recyclerView: RecyclerView? = null
-    var adapter: RecyclerAdapter? = null
+    var viewAdapter: RecyclerAdapter? = null
+
     var melon_chart_url = "https://www.melon.com/chart/"
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recyclerView = findViewById(R.id.recyclerView_chart)
+
         val linearLayoutManager = LinearLayoutManager(this)
-        recyclerView.setLayoutManager(linearLayoutManager)
-        adapter = RecyclerAdapter()
-        recyclerView.setAdapter(adapter)
+        viewAdapter = RecyclerAdapter()
+
+        recyclerView = findViewById<RecyclerView>(R.id.recyclerView_chart).apply {
+            layoutManager = linearLayoutManager
+            adapter = viewAdapter
+
+        }
+
         data
     }
 
@@ -71,15 +76,16 @@ class MainActivity : AppCompatActivity() {
                         data.imageUrl = listUrl[i]
                         data.rankNum = (i + 1).toString()
                         data.name = listName[i]
-                        adapter!!.addItem(data)
+                        viewAdapter!!.addItem(data)
                     }
-                    adapter!!.notifyDataSetChanged()
+                    viewAdapter!!.notifyDataSetChanged()
                 })
             } catch (e: IOException) {
                 e.printStackTrace()
             }
             return null
         }
+
 
     }
 }
